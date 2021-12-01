@@ -1,6 +1,6 @@
 interface Teacher {
-  firstName: string,
-  lastName: string,
+  readonly firstName: string,
+  readonly lastName: string,
   fullTimeEmployee: boolean,
   yearsOfExperience?: Number,
   location: string,
@@ -16,8 +16,12 @@ interface printTeacherFunction {
 }
 
 const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => `${firstName.charAt(0)}.${lastName}`;
+interface classInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
 
-class StudentClass {
+class StudentClass implements classInterface{
   firstName: string;
   lastName: string;
 
@@ -33,3 +37,10 @@ class StudentClass {
     return this.firstName;
   }
 }
+interface StudentConstructor {
+  (firstName: string, lastName: string): classInterface;
+}
+
+const student = new StudentClass("Djo", "djo");
+console.log(student.displayName())
+console.log(student.workOnHomework())
